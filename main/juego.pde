@@ -1,18 +1,38 @@
+float arc = 0.0;
+
+float up = 0.0;
+float down = 0.0;
+float left = 0.0;
+float right = 0.0;
+
+float x = 400;
+float y = 300;
+
+
 void juego(){
   
   background(fondo);
   boton4.crear();
   boton4.presionar();
   
+  bingus1.crear();
+  bingus1.mover();
+  
+  bingus2.crear();
+  bingus2.mover();
+  
+  bingus3.crear();
+  bingus3.mover();
+  
   arc = atan2((mouseY-y),(mouseX-x));
 
-  x += (right - left) * 5;
-  y += (down-up) * 5;
-  
   pushMatrix();
   translate(x,y);
   beginShape();
-  image(floppa,0,0);
+  floppa1.crear();
+  x += (right - left) * 3;
+  y += (down - up) * 3;
+  //println(x,y);
   rotate(arc);
   image(arco,0,0);
   endShape();
