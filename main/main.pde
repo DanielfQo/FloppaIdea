@@ -20,7 +20,8 @@ void setup(){
   size(800,600);
   imageMode(CENTER);
   rectMode(RADIUS);
-  frameRate(60);
+  ellipseMode(RADIUS);
+  frameRate(30);
   
   floppa = loadImage("data/floppa.png");
   arco = loadImage("data/arco.png");

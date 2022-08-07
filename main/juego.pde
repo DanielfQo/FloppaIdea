@@ -15,29 +15,44 @@ void juego(){
   boton4.crear();
   boton4.presionar();
   
-  bingus1.crear();
-  bingus1.mover();
-  
-  bingus2.crear();
-  bingus2.mover();
-  
-  bingus3.crear();
-  bingus3.mover();
-  
   arc = atan2((mouseY-y),(mouseX-x));
-
   pushMatrix();
   translate(x,y);
   beginShape();
   floppa1.crear();
-  x += (right - left) * 3;
-  y += (down - up) * 3;
+  x += (right - left) * 4;
+  y += (down - up) * 4;
   //println(x,y);
   rotate(arc);
   image(arco,0,0);
   endShape();
   popMatrix();
   
+  bingus1.crear();
+  bingus2.crear();
+  
+  //bingus3.crear();
+  
+  if(bingus1.colisionFloppa()!= true){
+    if(bingus1.colisionBingus(bingus2)!= true){
+      bingus1.mover();
+    }
+    else bingus1.rebotar(bingus2);
+  }
+
+  if(bingus2.colisionFloppa()!= true){
+    if(bingus2.colisionBingus(bingus1)!= true){
+      bingus2.mover();
+    }
+    else bingus2.rebotar(bingus1);
+  }
+  
+  
+
+  /*if(bingus3.colisionFloppa()!= true){
+    bingus3.mover();
+  }
+*/
 }
 
 void keyPressed(){
