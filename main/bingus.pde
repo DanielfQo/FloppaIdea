@@ -3,7 +3,7 @@ class bingus{
   float bx;
   float by;
   float velocidad = 1;
-  float velocidadr = 5;
+  float velocidadr = 1;
   int barea;
   int bradio;
   
