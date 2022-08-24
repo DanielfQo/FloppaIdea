@@ -1,74 +1,43 @@
-PImage floppa;
-PImage arco;
-PImage fondo;
-PImage bingus;
+PImage proyectil,botonR,fondo1,fondo2; 
 
-boton boton1;
-boton boton2;
-boton boton3;
-boton boton4;
+Escenario escenario;
+Floppa floppa;
+Vidas vidas;
 
-floppa floppa1;
+int puntaje,puntajematar;
 
-bingus bingus1;
-bingus bingus2;
-bingus bingus3;
+ArrayList<Bingus> bingus;
+ArrayList<Proyectil> proyectiles;
 
-int botones = 0;
+Boton[] botones = new Boton[4];
+
+int vboton = 0;
+int nvidas = 8,tiempo,tiempoz;
+
 
 void setup(){
-  size(800,600);
+  size(832,672);
   imageMode(CENTER);
-  rectMode(RADIUS);
-  ellipseMode(RADIUS);
-  frameRate(30);
+  proyectil = loadImage("data/proyectil.png");
+  botonR = loadImage("data/botonRetroceder.png");
+  fondo1 = loadImage("data/fondo1.png");
+  fondo2 = loadImage("data/fondo2.png");
+  botones[0] = new Boton("Jugar",300,180);
+  botones[1] = new Boton("Tutorial",300,270);
+  botones[2] = new Boton("Salir",300,360);
   
-  floppa = loadImage("data/floppa.png");
-  arco = loadImage("data/arco.png");
-  fondo = loadImage("data/fondo.png");
-  bingus = loadImage("data/bingus.png");
   
-  boton1 = new boton("Jugar",300,180);
-  boton2 = new boton("Tutorial",300,270);
-  boton3 = new boton("Salir",300,360);
-  boton4 = new boton("Regresar",600,10);
-  
-  floppa1 = new floppa(0,0);
-  
-  bingus1 = new bingus("Normal",400,0);
-  bingus2 = new bingus("Normal",800,300);
-  bingus3 = new bingus("Normal",0,300);
 }
+
 void draw(){
-  
-  if( botones == 0){
+  //vboton Sirve para cambiar de pantalla
+  if( vboton == 0){
     menu();
-    
   }
-  else if( botones == 1){
-    juego();
+  else if( vboton == 1){
+    juego();    
   }
-  else if( botones == 2){
+  else if( vboton == 2){
     tutorial();
   }
-}
-
-void menu(){
-  background(0);
-  boton1.crear();
-  boton1.presionar();
-  boton2.crear();
-  boton2.presionar();
-  boton3.crear();
-  boton3.presionar();
-}
-
-void tutorial(){
-  
-  background(0);
-  boton4.crear();
-  boton4.presionar();
-  textAlign(LEFT);
-  text("Tutorial",20,60);
-  
 }

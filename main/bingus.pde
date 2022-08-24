@@ -1,103 +1,61 @@
-class bingus{
-  String tipo;
-  float bx;
-  float by;
-  float velocidad = 1;
-  float velocidadr = 1;
-  int barea;
-  int bradio;
-  
-  bingus(String _tipo,int _bx, int _by){
-    tipo = _tipo;
-    bx = _bx;
-    by = _by;
-    bradio = 15;
-    
+//clase que representa a los enemigos
+class Bingus extends Imagen {
+  float vel = 1, velr = 1;
+  boolean dead = false;
+  //constructor
+  Bingus(int _x, int _y){
+    super(1, _x, _y);
   }
-  void crear(){
-    //ellipse(bx,by,bradio,bradio);
-    image(bingus,bx,by);
-  }
-  void mover(){
-    if( bx < x && by < y){
-      bx = bx+velocidad;
-      by = by+velocidad;
-    }
-    if( bx > x && by > y){
-      bx = bx-velocidad;
-      by = by-velocidad;
-    }
-    if( bx < x && by > y){
-      bx = bx+velocidad;
-      by = by-velocidad;
-    }
-    if( bx > x && by < y){
-      bx = bx-velocidad;
-      by = by+velocidad;
-    }
-    if( bx < x ){
-      bx = bx+velocidad*3;
-    }
-    if( bx > x ){
-      bx = bx-velocidad*3;
-    }
-    if(by > y){
-      by = by-velocidad*3;
-    }
-    if(by < y){
-      by = by+velocidad*3;
-    }
-  }
-  void rebotar(bingus otro){
-    if( bx < otro.bx && by < otro.by){
-      bx = bx-velocidadr;
-      by = by-velocidadr;
-    }
-    if( bx > otro.bx && by > otro.by){
-      bx = bx+velocidadr;
-      by = by+velocidadr;
-    }
-    if( bx < otro.bx && by > otro.by){
-      bx = bx-velocidadr;
-      by = by+velocidadr;
-    }
-    if( bx > otro.bx && by < otro.by){
-      bx = bx+velocidadr;
-      by = by-velocidadr;
-    }
-    if( bx < otro.bx ){
-      bx = bx-velocidadr;
-    }
-    if( bx > otro.bx ){
-      bx = bx+velocidadr;
-    }
-    if(by > otro.by){
-      by = by+velocidadr;
-    }
-    if(by < otro.by){
-      by = by-velocidadr;
-    }
-    
-  }
-  boolean colisionFloppa(){
-    float sumaRadios = bradio + floppa1.fradio;
-    float dist = dist(bx,by,x,y);
-    if(dist > sumaRadios){
-      return false;
+  void dibujar(){
+    if (!dead){
+      super.dibujar();
+      mover(floppa);
     }
     else{
-      return true;
+      center.x = 15000;
+      center.y= 15000;
     }
   }
-  boolean colisionBingus(bingus otro){
-    float sumaRadios = bradio + otro.bradio;
-    float dist = dist(bx,by,otro.bx,otro.by);
-    if(dist > sumaRadios){
-      return false;
+  //se mueve a las coordenadas del floppa
+  void mover(Floppa f){
+    if( center.x < f.center.x && center.y < f.center.y){
+      cambio.x = vel;
+      cambio.y = vel;
     }
-    else{
-      return true;
+    if( center.x > f.center.x && center.y > f.center.y){
+      cambio.x = -vel;
+      cambio.y = -vel;
     }
+    if( center.x < f.center.x && center.y > f.center.y){
+      cambio.x = +vel;
+      cambio.y = -vel;
+    }
+    if( center.x > f.center.x && center.y < f.center.y){
+      cambio.x = -vel;
+      cambio.y = +vel;
+    }
+    if( center.x < f.center.x ){
+      cambio.x = 1.3*vel;
+    }
+    if( center.x > f.center.x ){
+      cambio.x = -1.3*vel;
+    }
+    if(center.y > f.center.y){
+      cambio.y = -1.3*vel;
+    }
+    if(center.y < f.center.y){
+      cambio.y = 1.3*vel;
+    }
+    
+    center.x += cambio.x;
+    center.y += cambio.y;
   }
   
+  void setDead(){
+    dead = true;
+  }
+  //Es para diferencia un bingus de otra imagen
+  boolean getEnemy(){
+    return true;
+  }
 }
